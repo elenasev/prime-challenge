@@ -26,11 +26,15 @@ column.
 ## Usage ##
 
 Without arguments to get the multiplication table for the first 10 prime numbers:
-```php bin/app.php ```
+```
+php bin/app.php 
+```
 
 Use a positive number as argument to get the table with N prime numbers
 For example to generate the table for 20 prime numbers use:
-```php bin/app.php 20 ```
+```
+php bin/app.php 20 
+```
 
 --------------
 
