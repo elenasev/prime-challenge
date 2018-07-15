@@ -8,7 +8,13 @@ class PrimeNumbersTest extends PHPUnit_Framework_TestCase
 
     public function setUp() 
     {
-        $validator = new PrimeNumberValidator();
+        $validator = $this->getMockBuilder('\App\Service\PrimeNumberValidator')
+            ->setMethods(array('isPrime'))
+            ->getMock();
+
+        $validator->expects($this->any())
+             ->method('isPrime')
+             ->will($this->returnValue(true));
         $this->prime_numbers_service = new PrimeNumbers($validator);
     }
 
@@ -25,22 +31,6 @@ class PrimeNumbersTest extends PHPUnit_Framework_TestCase
     public function testGetPrimeNumbersReturnsAnArrayWithNValuesWhenNIsPassedAsArgument()
     {
         $this->assertTrue(count($this->prime_numbers_service->getPrimeNumbers(2)) == 2);
-    }
-
-    public function testGetPrimeNumbersReturnsAnArrayWithTenPrimeNumbers()
-    {
-        $this->assertEquals(
-            [2, 3, 5, 7, 11, 13, 17, 19, 23, 29],
-            $this->prime_numbers_service->getPrimeNumbers()
-        );
-    }
-
-    public function testGetPrimeNumbersReturnsAnArrayWithNPrimeNumbers()
-    {
-        $this->assertEquals(
-            [2, 3, 5, 7, 11],
-            $this->prime_numbers_service->getPrimeNumbers(5)
-        );
     }
 }
 
